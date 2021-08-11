@@ -23,5 +23,11 @@ spec:
         }
       }
     }
+    stage('Build') {
+        steps {
+           sh 'npm install ' 
+           sh './script/test' 
+        }
+    }
   }
 }
