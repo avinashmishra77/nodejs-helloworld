@@ -7,6 +7,7 @@ pipeline {
 apiVersion: v1
 kind: Pod
 spec:
+  serviceAccount: jenkins
   containers:
   - name: nodejs
     image: node:14-alpine
