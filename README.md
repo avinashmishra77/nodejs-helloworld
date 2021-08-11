@@ -21,3 +21,15 @@ console.log('Server running at http://' + laddr + ':' + port + '/');
 ```
 
 ## Trigger
+
+**Note:**
+
+Since using GitHub free account there might be Rate limiting to the number of API requests you can make, refer [Rate limiting](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting).
+
+For unauthenticated requests, the rate limit allows for up to 60 requests/hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests.
+
+The returned HTTP headers of any API request show your current rate limit status:
+
+```bash
+curl -I https://api.github.com/users/avinashmishra77
+```
