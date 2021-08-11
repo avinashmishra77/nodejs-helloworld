@@ -1,5 +1,5 @@
 pipeline {
-    agent {
+    kubernetes {
         docker {
             image 'node:14-alpine'            
         }
