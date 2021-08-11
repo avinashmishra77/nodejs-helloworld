@@ -12,6 +12,11 @@ spec:
     image: node:14-alpine
     command: ['cat']
     tty: true
+  - name: kubectl
+    image: gcr.io/cloud-builders/kubectl
+    command:
+    - cat
+    tty: true    
   - name: kaniko
     workingDir: /tmp/jenkins
     image: gcr.io/kaniko-project/executor:debug
@@ -59,8 +64,8 @@ spec:
     }
     stage('Deploy'){
         steps {
-            container(name: 'kaniko', shell: '/busybox/sh'){
-                sh 'kubectl set image deployment/nodejs nodejs-helloworld=avinashmishra/nodejs-helloworld:$BUILD_NUMBER' 
+            container(name: 'kubectl'){
+                sh 'kubectl -n default set image deployment/nodejs nodejs-helloworld=avinashmishra/nodejs-helloworld:$BUILD_NUMBER' 
             }
         }
     }    
