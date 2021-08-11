@@ -12,6 +12,26 @@ spec:
     image: node:14-alpine
     command: ['cat']
     tty: true
+  - name: kaniko
+    workingDir: /tmp/jenkins
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: Always
+    command:
+    - sleep
+    args:
+    - 9999999
+    volumeMounts:
+      - name: jenkins-docker-cfg
+        mountPath: /kaniko/.docker
+  volumes:
+  - name: jenkins-docker-cfg
+    projected:
+      sources:
+      - secret:
+          name: kaniko-docker-credentials
+          items:
+            - key: .dockerconfigjson
+              path: config.json    
 """
     }
   }
@@ -26,10 +46,16 @@ spec:
     stage('Build') {
       steps {
         container('nodejs'){
-        sh 'npm install ' 
-        sh './script/test' 
+        sh 'npm install '         
         }
       }
+    }
+    stage('Build with Kaniko'){
+        steps {
+            container(name: 'kaniko', shell: '/busybox/sh'){
+                sh '/kaniko/executor --context `pwd` --verbosity debug --dockerfile Dockerfile --whitelist-var-run=true --destination=avinashmishra/nodejs-helloworld:1.0.0' 
+            }
+        }
     }
   }
 }
