@@ -19,3 +19,5 @@ http.createServer(function (req, res) {
 }).listen(port, laddr);
 console.log('Server running at http://' + laddr + ':' + port + '/');
 ```
+
+## Trigger
