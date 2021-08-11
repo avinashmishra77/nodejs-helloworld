@@ -18,8 +18,9 @@ spec:
         app: nodejs
     spec:
       containers:
-      - image: avinashmishra/nodejs-helloworld:1.0.0
+      - image: avinashmishra/nodejs-helloworld:1.0.0        
         name: nodejs-helloworld
+        imagePullPolicy: Always
         resources: {}
         ports:
         - containerPort: 3000
