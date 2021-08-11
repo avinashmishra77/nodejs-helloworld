@@ -24,9 +24,10 @@ spec:
       }
     }
     stage('Build') {
-        steps {
-           sh 'npm install ' 
-           sh './script/test' 
+        steps 
+        container('nodejs') {
+            sh 'npm install ' 
+            sh './script/test' 
         }
     }
   }
