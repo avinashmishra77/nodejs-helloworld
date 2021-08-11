@@ -8,18 +8,18 @@ apiVersion: v1
 kind: Pod
 spec:
   containers:
-  - name: maven
-    image: maven:3.3.9-jdk-8-alpine
+  - name: nodejs
+    image: node:14-alpine
     command: ['cat']
     tty: true
 """
     }
   }
   stages {
-    stage('Run maven') {
+    stage('Run node') {
       steps {
-        container('maven') {
-          sh 'mvn -version'
+        container('nodejs') {
+          sh 'node -version'
         }
       }
     }
