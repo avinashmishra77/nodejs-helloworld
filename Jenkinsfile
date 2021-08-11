@@ -19,7 +19,7 @@ spec:
     stage('Run node') {
       steps {
         container('nodejs') {
-          sh 'node -version'
+          sh 'node --version'
         }
       }
     }
