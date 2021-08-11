@@ -53,7 +53,7 @@ spec:
     stage('Build with Kaniko'){
         steps {
             container(name: 'kaniko', shell: '/busybox/sh'){
-                sh '/kaniko/executor --context `pwd` --verbosity debug --dockerfile Dockerfile --whitelist-var-run=true --destination=avinashmishra/nodejs-helloworld:1.0.0' 
+                sh '/kaniko/executor --context `pwd` --dockerfile Dockerfile --whitelist-var-run=true --destination=avinashmishra/nodejs-helloworld:1.0.0' 
             }
         }
     }
