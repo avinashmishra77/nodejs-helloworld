@@ -42,28 +42,22 @@ spec:
     }
   }
   stages {
-    stage('Run node') {
-      steps {
-        container('nodejs') {
-          sh 'node --version'
-        }
-      }
-    }
-    stage('Build') {
+    stage('Install package dependencies') {
       steps {
         container('nodejs'){
-        sh 'npm install '         
+        //sh 'npm install '         
+        sh 'npm ci '         
         }
       }
     }
-    stage('Build with Kaniko'){
+    stage('Build and Push Docker image'){
         steps {
             container(name: 'kaniko', shell: '/busybox/sh'){
                 sh '/kaniko/executor --context `pwd` --dockerfile Dockerfile --whitelist-var-run=true --destination=avinashmishra/nodejs-helloworld:$BUILD_NUMBER' 
             }
         }
     }
-    stage('Deploy'){
+    stage('Deploy Docker image'){
         steps {
             container(name: 'kubectl'){
                 sh 'kubectl -n default set image deployment/nodejs nodejs-helloworld=avinashmishra/nodejs-helloworld:$BUILD_NUMBER' 

@@ -18,7 +18,7 @@ spec:
         app: nodejs
     spec:
       containers:
-      - image: avinashmishra/nodejs-helloworld:1.0.0        
+      - image: avinashmishra/nodejs-helloworld:latest        
         name: nodejs-helloworld
         imagePullPolicy: Always
         resources: {}
