@@ -53,7 +53,7 @@ spec:
     stage('Build and Push Docker image'){
         steps {
             container(name: 'kaniko', shell: '/busybox/sh'){
-                sh '/kaniko/executor --context `pwd` --dockerfile Dockerfile --whitelist-var-run=true --destination=avinashmishra/nodejs-helloworld:$BUILD_NUMBER' 
+                sh '/kaniko/executor --context `pwd` --dockerfile Dockerfile --whitelist-var-run=true --destination=avinashmishra/nodejs-helloworld:$BUILD_NUMBER --destination=avinashmishra/nodejs-helloworld:latest' 
             }
         }
     }
